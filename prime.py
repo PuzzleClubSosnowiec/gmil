@@ -29,19 +29,3 @@ def is_prime(n):
                 return False
         return True
     return None
-
-# -------------------------------------------------------------------------------------------------
-if __name__ == '__main__':
-    counter = 0
-    import time
-    start = time.time()
-
-    for n in range(10000000):
-        if(is_prime(n)):
-            counter += 1
-    finish = time.time()
-    print(counter)
-    print()
-    print(f'  czas wykonania = {round((finish - start))}s')
-
-
