@@ -135,7 +135,47 @@ def zadanie_15(name):
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_16(name):
-    description.not_resolved()
+    def find(n, ratio):
+        top = 100
+        bottom = 1
+        bill = 0
+        pay_for_false = 600
+        pay_for_true = 400
+        while(top != bottom):
+            mid = round((top - bottom + 1) * ratio) + bottom - 1
+            if mid < bottom:
+                mid = bottom
+            if mid == top:
+                mid = top - 1
+            if n >= bottom and n <= mid:
+                bill += pay_for_false
+                top = mid
+            else:
+                bill += pay_for_true
+                bottom = mid + 1
+        return bill
+
+
+    nnn = 0
+    rrr = 0
+    max_ratio = 1000
+    min_max_bill = 600*100
+    for r in range(1, max_ratio):
+        r = max_ratio-r
+        ratio = r / max_ratio
+        max_bill = 0
+        nn = 0
+        for n in range(1, 101):
+            bill = find(n, ratio)
+            if bill > max_bill:
+                max_bill = bill
+                nn = n
+        if max_bill < min_max_bill:
+            min_max_bill = max_bill
+            nnn = nn
+            rrr = ratio
+        min_max_bill
+    print(f'  Odp: Zapłaci {min_max_bill} dolarów, dla nnn={nnn} i rrr = {rrr}')
 
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
@@ -146,7 +186,54 @@ def zadanie_17(name):
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_18(name):
-    description.not_resolved()
+    def heron(a, b, c):
+        p = (a + b + c) / 2
+        PSqare = p * (p - a) * (p - b) * (p - c)
+        if PSqare > 0:
+            return math.sqrt(PSqare)
+        return None
+
+    def side(area, a, b):
+        h = 2 * area / a
+        if h > b:
+            return None
+        x = math.sqrt(b * b - h * h)
+        ax = a - x
+        c = math.sqrt(ax * ax + h * h)
+        return c
+
+    counter = 0
+    bc = 13
+    bf = 10
+    cd = 15
+    N_MAX = 100
+    delta = 0.0000000000001
+    aa =0;
+    for be in range(1, bf):
+        for ce in range(1, cd):
+            if be + ce > bc and be + bc > ce and bc + ce > be:
+                aa += 1
+                ef = bf - be
+                de = cd - ce
+                cf = side(ef * heron(bc, be, ce) / be, ef, ce)
+                bd = side(de * heron(bc, be, ce) / ce, de, be)
+                if cf != None and bd != None:
+                    if abs(cf - int(cf)) < delta and abs(bd - int(bd)) < delta:
+                        cf = int(cf)
+                        bd = int(bd)
+                        for ad in range(1, N_MAX):
+                            for af in range(1, N_MAX):
+                                ab = bd + ad
+                                ac = cf + af
+                                p_abc = heron(ab, ac, bc)
+                                p_acd = heron(ac, ad, cd)
+                                p_bcd = heron(bc, bd, cd)
+                                p_abf = heron(ab, af, bf)
+                                p_bcf = heron(bc, bf, cf)
+                                if p_abc != None and p_acd != None and p_bcd != None and p_abf != None and p_bcf != None:
+                                    if abs(p_abc - p_acd - p_bcd) < delta and abs(p_abc - p_abf - p_bcf) < delta:
+                                        counter += 1
+                                        print(f'{aa}  {counter}) Odp: pole wynosi {round(p_abc)} ... dokładnie {p_abc} bo cf={cf}; bd={bd}; be={be}; ce={ce}; ab={ab}; ac={ac};')
 
 # -------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
