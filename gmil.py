@@ -71,7 +71,28 @@ def zadanie_13(name):
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_14(name):
-    description.not_resolved()
+    def sum_digits(n):
+        s = 0
+        while n:
+            s += n % 10
+            n //= 10
+        return s
+
+
+    odpowiedzi = []
+    Y = 2025
+    for n in range(1,Y):
+        k = n
+        while (k<Y):
+            k=k+sum_digits(k)
+        if(k==Y):
+            odpowiedzi.append(n)
+
+    print("ilosc odpowiedzi : 1", "    odp : ", len(odpowiedzi))
+
+
+
+
 
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
@@ -96,7 +117,7 @@ def zadanie_18(name):
 # -------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
 
-    description.main_header('2023', 'Eliminacje krajowe')
+    description.main_header('2025', 'Eliminacje krajowe')
 
     zadanie_01('')
     zadanie_02('')
