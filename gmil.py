@@ -3,6 +3,22 @@ import itertools
 import math
 import prime
 
+
+def sum_digits(n):
+    s = 0
+    while n:
+        s += n % 10
+        n //= 10
+    return s
+
+def product_digits(n):
+    if n==0:
+        return 0
+    p = 1
+    while n:
+        p *= n % 10
+        n //= 10
+    return p
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_01(name):
@@ -51,12 +67,26 @@ def zadanie_09(name):
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_10(name):
-    description.not_resolved()
+
+    odpowiedzi = []
+    DOWN = 10
+    UP = 100
+    for n in range(DOWN,UP):
+        if(n==sum_digits(n)+product_digits(n)):
+            odpowiedzi.append(n)
+    print("ilosc odpowiedzi : 1", "    odp : ", len(odpowiedzi), "   spr : ", odpowiedzi)
 
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_11(name):
-    description.not_resolved()
+    odpowiedzi = []
+    DOWN = 1
+    UP = 46
+    for i in range(DOWN,UP):
+        for j in range(DOWN, UP):
+            if(2025==i*i + i*i + j*j):
+                odpowiedzi.append([i,i,j])
+    print("ilosc odpowiedzi : ", len(odpowiedzi), "   odp : ", odpowiedzi)
 
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
@@ -71,28 +101,17 @@ def zadanie_13(name):
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
 def zadanie_14(name):
-    def sum_digits(n):
-        s = 0
-        while n:
-            s += n % 10
-            n //= 10
-        return s
-
 
     odpowiedzi = []
     Y = 2025
     for n in range(1,Y):
         k = n
         while (k<Y):
-            k=k+sum_digits(k)
+            k=k+2*sum_digits(k)
         if(k==Y):
             odpowiedzi.append(n)
 
-    print("ilosc odpowiedzi : 1", "    odp : ", len(odpowiedzi))
-
-
-
-
+    print("ilosc odpowiedzi : 1", "    odp : ", len(odpowiedzi), odpowiedzi)
 
 # -------------------------------------------------------------------------------------------------
 @description.task_header_and_footer
